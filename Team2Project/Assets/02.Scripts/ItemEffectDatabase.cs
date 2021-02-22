@@ -59,13 +59,14 @@ public class ItemEffectDatabase : MonoBehaviour
                             case POISON:
                                 thePlayerStatus.DecreasePOISON(itemEffects[x].num[y]);
                                 break;
-                            
-                                
+
+
                             default:
-                               
+
                                 break;
                         }
                         Debug.Log(_item.itemName + " 을 사용했습니다");
+                       
 
                     }
                     return;
@@ -77,4 +78,7 @@ public class ItemEffectDatabase : MonoBehaviour
         }
 
     }
+
+    
 }
+

@@ -13,7 +13,7 @@ public class 수술실trigger : MonoBehaviour
         if(flashlight.flashlighttrigger==true)
         {
             Debug.Log("이러면 죽는기야");
-            flashlightopen = flashlightopen + 1;
+            flashlightopen ++;
             무서운수술실문 = transform.Find("무서운수술실문").gameObject;
             무서운수술실문.gameObject.SetActive(true);
         }

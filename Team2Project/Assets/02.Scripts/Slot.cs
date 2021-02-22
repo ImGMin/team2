@@ -7,8 +7,8 @@ using UnityEngine.EventSystems;
 public class Slot : MonoBehaviour ,   IPointerExitHandler , IPointerClickHandler, IPointerEnterHandler
 {
 
-    
 
+    public Image _UI_ChartA;
     public Item item;
     public int itemCount;
     public Image itemImage;
@@ -19,6 +19,7 @@ public class Slot : MonoBehaviour ,   IPointerExitHandler , IPointerClickHandler
     private Text text_Count;
     [SerializeField]
     private GameObject go_CountImage;
+    
 
     
 
@@ -26,6 +27,8 @@ public class Slot : MonoBehaviour ,   IPointerExitHandler , IPointerClickHandler
     private Rect baseRect;
     private InputNumber theInputNumber;
     private SlotToolTip theSlotToolTip;
+
+   
 
     public void ShowToolTip(Item _item)
     {
@@ -37,6 +40,8 @@ public class Slot : MonoBehaviour ,   IPointerExitHandler , IPointerClickHandler
         theSlotToolTip.HideToolTip();
     }
     void Start()
+    
+        
     {
         
         theItemEffectDatabase = FindObjectOfType<ItemEffectDatabase>();
@@ -54,6 +59,12 @@ public class Slot : MonoBehaviour ,   IPointerExitHandler , IPointerClickHandler
         item = _item;
         itemCount = _count;
         itemImage.sprite = item.itemImage;
+
+        item._UI_ChartA = GameObject.Find("단서").transform.Find(item._chartName).GetComponent<Image>();
+        if(item._UI_ChartA == null)
+        {
+            Debug.LogError("Null UI Chart");
+        }
 
         if (item.itemType != Item.ItemType.Clue)
         {
@@ -112,7 +123,14 @@ public class Slot : MonoBehaviour ,   IPointerExitHandler , IPointerClickHandler
             {
                 if(item.itemType == Item.ItemType.Clue)
                 {
-                    //단서
+
+                     if(item._UI_ChartA.gameObject.activeSelf == false)
+                    {
+                        item._UI_ChartA.gameObject.SetActive(true);
+                        
+                    }
+                   
+
                 }
                 else
                 {
@@ -120,9 +138,14 @@ public class Slot : MonoBehaviour ,   IPointerExitHandler , IPointerClickHandler
                     theItemEffectDatabase.UseItem(item);
                     if(item.itemType == Item.ItemType.Tool) //도구
                     SetSlotCount(-1);
+                    GameObject.Find("물마시는소리").GetComponent<AudioSource>().Play();
+
                     
                 }
+                
             }
+            
+
         }    
     }
 

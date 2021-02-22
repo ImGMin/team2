@@ -39,6 +39,7 @@ public class PlayerControl : MonoBehaviour
     private Camera theCamera;
     private Rigidbody myRigid;
 
+    
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -68,6 +69,7 @@ public class PlayerControl : MonoBehaviour
         }
 
     }
+   
 
     private void TryCrouch()
     {

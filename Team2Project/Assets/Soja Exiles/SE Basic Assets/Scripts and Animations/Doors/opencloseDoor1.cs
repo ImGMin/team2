@@ -7,15 +7,18 @@ public class opencloseDoor1: MonoBehaviour {
 	public Animator openandclose1;
 	public bool open;
 	public Transform Player;
+	public AudioSource audio;
+	public AudioClip _openSound;
+	public AudioClip _closeSound;
 	
 
 	void Start (){
 		open = false;
 
 		Player = GameObject.FindWithTag("Player").transform;
-		
 
-		if(Player == null)
+		audio = GetComponent<AudioSource>();
+		if (Player == null)
         {
 			Debug.LogError("플레이어 찾지 못함.");
         }
@@ -30,11 +33,15 @@ public class opencloseDoor1: MonoBehaviour {
 					if (open == false) {
 						if (Input.GetMouseButtonDown (0)) {
 							StartCoroutine (opening ());
+							audio.clip = _openSound;
+							audio.Play();
 						}
 					} else {
 						if (open == true) {
 							if (Input.GetMouseButtonDown (0)) {
 								StartCoroutine (closing ());
+								audio.clip = _closeSound;
+								audio.Play();
 							}
 						}
 

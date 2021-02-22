@@ -11,7 +11,7 @@ public class GameMenu : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("MainMenu"))
             {
                 pause=!pause;
             }
@@ -27,19 +27,8 @@ public class GameMenu : MonoBehaviour
             if(!pause)
             {
                 menu.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                
                 Time.timeScale = 1;
             }
-    }
-    
-    public void ToTitle()
-    {
-        SceneManager.LoadScene(0);
-    }
-
-    public void GameExit()
-    {
-        Application.Quit();
     }
 }

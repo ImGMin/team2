@@ -11,6 +11,9 @@ public class StatusController : MonoBehaviour
     private int hp;
     private int currentHp;
 
+    [SerializeField]
+    private int hpDecreaseTime;
+    private int currentHpDecreaseTime;
     // 독
     [SerializeField]
     private int poison;
@@ -26,6 +29,7 @@ public class StatusController : MonoBehaviour
 
     private const int HP = 0, POISON = 1;
 
+    
     // Use this for initialization
     void Start()
     {
@@ -41,7 +45,16 @@ public class StatusController : MonoBehaviour
         GaugeUpdate();
     }
 
-   
+
+   public void GameOver()
+    {
+        if(currentHp <= 30)
+        {
+            print("HP : " + currentHp);
+           LoadingSceneManager.LoadScene("Fail");
+            Debug.Log("사망하였습니다.");
+        }
+    }
 
     private void Poison()
     {
@@ -59,10 +72,13 @@ public class StatusController : MonoBehaviour
 
         if (currentPoison > 0)
         {
-            
+            if (currentHpDecreaseTime <= hpDecreaseTime)
+                currentHpDecreaseTime++;
+            else
+            {
                 currentHp--;
-                currentHp = 100;
-            
+                currentHpDecreaseTime = 0;
+            }
         }
     }
 
@@ -86,8 +102,11 @@ public class StatusController : MonoBehaviour
     }
     public void DecreaseHP(int _count)
     {
-        currentHp -= _count;
-        if (currentHp <= 0) ;
+        if (currentHp - _count < 0)
+            currentHp = 0;
+        else
+            currentHp -= _count;
+        
     }
     public void DecreasePOISON(int _count)
     {
